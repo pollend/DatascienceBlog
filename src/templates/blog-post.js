@@ -5,6 +5,7 @@ import Bio from '../components/Bio'
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
 import { rhythm, scale } from '../utils/typography'
+import MDXRenderer from 'gatsby-mdx/mdx-renderer'
 
 class BlogPostTemplate extends React.Component {
   render() {
@@ -26,7 +27,9 @@ class BlogPostTemplate extends React.Component {
         >
           {post.frontmatter.date}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+          <MDXRenderer scope={this.props.__mdxScope}>
+              {post.code.body}
+          </MDXRenderer>
         <hr
           style={{
             marginBottom: rhythm(1),
@@ -76,7 +79,9 @@ export const pageQuery = graphql`
     mdx(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
-      html
+       code {
+        body
+      }
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
