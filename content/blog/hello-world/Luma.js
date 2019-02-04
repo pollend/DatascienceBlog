@@ -2,9 +2,9 @@ import React from 'react'
 import GL from '@luma.gl/constants';
 import {addEvents} from 'luma.gl/addons';
 import {AnimationLoop, setParameters, Sphere, Texture2D} from 'luma.gl';
-import {Vector3, Matrix4} from 'math.gl';
 import {loadImage} from '@loaders.gl/core';
-import moon from "./moon.gif"
+import {Vector3, Matrix4} from 'math.gl';
+import moon_file from "./moon.gif"
 
 const VERTEX_SHADER = `\
 attribute vec3 positions;
@@ -38,7 +38,7 @@ void main(void) {
         vLightWeighting = uAmbientColor + uDirectionalColor * directionalLightWeighting;
     }
 }
-`
+`;
 
 const FRAGMENT_SHADER = `\
 precision highp float;
@@ -49,11 +49,11 @@ varying vec3 vLightWeighting;
 uniform sampler2D uSampler;
 
 void main(void) {
-  vec4 textureColor = texture2D(uSampler, vec2(vTextureCoord.s,  vTextureCoord.t));
-  textureColor = vec4(1.0, vTextureCoord.s,  vTextureCoord.t,1.0);
+  vec4 textureColor = texture2D(uSampler, vec2(1.0 - vTextureCoord.s, 1.0 - vTextureCoord.t));
   gl_FragColor = vec4(textureColor.rgb * vLightWeighting, textureColor.a);
 }
-`
+`;
+
 
 const appState = {
     mouseDown: false,
@@ -62,10 +62,13 @@ const appState = {
     moonRotationMatrix: new Matrix4()
 };
 
+let texture = null;
+
 class Luma extends React.Component {
     constructor(props) {
         super(props);
         this.ref =  React.createRef();
+
     }
     componentDidMount() {
         const m = this
@@ -79,14 +82,14 @@ class Luma extends React.Component {
                     depthTest: true
                 });
 
+                loadImage(moon_file).then((t) => {
+                   texture =  new Texture2D(gl,{ data:t});
+                });
 
                 return {
                     moon: new Sphere(gl, {
                         fs: FRAGMENT_SHADER,
                         vs: VERTEX_SHADER,
-                        uniforms: {
-                            uSampler: new Texture2D(gl, moon)
-                        },
                         nlat: 30,
                         nlong: 30,
                         radius: 2,
@@ -107,7 +110,7 @@ class Luma extends React.Component {
                 // Read controls
                 const {lighting, ambientColor, lightingDirection, directionalColor} = m.getControlValues();
 
-                moon.setUniforms({uUseLighting: lighting});
+                moon.setUniforms({uUseLighting: lighting,uSampler:texture});
 
                 if (lighting) {
                     lightingDirection.normalize();
@@ -127,8 +130,9 @@ class Luma extends React.Component {
                 });
             }
         });
-
+        animationLoop.getInfo = () => INFO_HTML;
         animationLoop.start({canvas: this.ref.current})
+
     }
 
     addMouseHandler(canvas) {

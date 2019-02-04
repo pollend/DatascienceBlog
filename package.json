@@ -8,8 +8,8 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
-    "@loaders.gl/core": "^0.5.3",
-    "@luma.gl/constants": "^7.0.0-alpha.3",
+    "@loaders.gl/core": "^0.5.4",
+    "@luma.gl/constants": "^7.0.0-alpha.6",
     "@mdx-js/mdx": "^0.16.8",
     "@mdx-js/tag": "^0.16.8",
     "chart.js": "^2.7.3",
@@ -36,8 +36,7 @@
     "gatsby-source-filesystem": "^2.0.2",
     "gatsby-transformer-remark": "^2.1.6",
     "gatsby-transformer-sharp": "^2.1.13",
-    "luma.gl": "^6.4.0",
-    "math.gl": "^2.3.0",
+    "luma.gl": "^6.2.0-beta",
     "prismjs": "^1.15.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
