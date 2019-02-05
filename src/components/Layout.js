@@ -1,9 +1,12 @@
 require('../style.scss')
 import React from 'react'
 import { Link } from 'gatsby'
+import UIkit from 'uikit'
+import Icons from 'uikit/dist/js/uikit-icons';
+import Header from './Header'
+
 
 import { rhythm, scale } from '../utils/typography'
-import {Grid, Row, Col} from 'react-flexbox-grid'
 
 class Layout extends React.Component {
   render() {
@@ -53,15 +56,17 @@ class Layout extends React.Component {
         </h3>
       )
     }
+
+    // style={{
+    //   marginLeft: `auto`,
+    //     marginRight: `auto`,
+    //     maxWidth: rhythm(24),
+    //     padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
+    // }}
+
     return (
-      <div
-        style={{
-          marginLeft: `auto`,
-          marginRight: `auto`,
-          maxWidth: rhythm(24),
-          padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`,
-        }}
-      >
+      <div>
+        <Header/>
         {header}
         {children}
         <footer>
