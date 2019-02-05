@@ -1,7 +1,9 @@
+require('../style.scss')
 import React from 'react'
 import { Link } from 'gatsby'
 
 import { rhythm, scale } from '../utils/typography'
+import {Grid, Row, Col} from 'react-flexbox-grid'
 
 class Layout extends React.Component {
   render() {
