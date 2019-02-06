@@ -1,46 +1,15 @@
 import React from 'react'
+import {graphql} from "gatsby";
 
 
 class Header extends React.Component{
   render() {
+    const { title} = this.props
+
     return(
-      <nav className="uk-navbar-container" uk-navbar="">
-
-        <div className="uk-navbar-left">
-
-          <ul className="uk-navbar-nav">
-            <li className="uk-active"><a href="#">Active</a></li>
-            <li>
-              <a href="#">Parent</a>
-              <div className="uk-navbar-dropdown">
-                <ul className="uk-nav uk-navbar-dropdown-nav">
-                  <li className="uk-active"><a href="#">Active</a></li>
-                  <li><a href="#">Item</a></li>
-                  <li><a href="#">Item</a></li>
-                </ul>
-              </div>
-            </li>
-            <li><a href="#">Item</a></li>
-          </ul>
-
-        </div>
-
+      <nav className="uk-navbar-container uk-navbar-transparent" uk-navbar="">
         <div className="uk-navbar-right">
-
-          <ul className="uk-navbar-nav">
-            <li className="uk-active"><a href="#">Active</a></li>
-            <li>
-              <a href="#">Parent</a>
-              <div className="uk-navbar-dropdown">
-                <ul className="uk-nav uk-navbar-dropdown-nav">
-                  <li className="uk-active"><a href="#">Active</a></li>
-                  <li><a href="#">Item</a></li>
-                  <li><a href="#">Item</a></li>
-                </ul>
-              </div>
-            </li>
-            <li><a href="#">Item</a></li>
-          </ul>
+          <a className="uk-navbar-item uk-logo" href="#">{title}</a>
 
         </div>
 
@@ -49,11 +18,3 @@ class Header extends React.Component{
   }
 }
 export default Header
-
-/*<div className="uk-navbar-left">
-  <ul className="uk-navbar-nav">
-    <li className="uk-active"><a href=""></a></li>
-    <li className="uk-parent"><a href=""></a></li>
-    <li><a href=""></a></li>
-  </ul>
-</div>*/

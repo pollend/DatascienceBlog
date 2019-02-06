@@ -3,7 +3,6 @@ import { Link, graphql } from 'gatsby'
 
 import Layout from '../components/Layout'
 import SEO from '../components/seo'
-import { rhythm } from '../utils/typography'
 require("uikit/dist/js/uikit")
 
 class BlogIndex extends React.Component {
@@ -18,24 +17,24 @@ class BlogIndex extends React.Component {
           title="All posts"
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
-        {posts.map(({ node }) => {
-          const title = node.frontmatter.title || node.fields.slug
-          return (
-            <div key={node.fields.slug}>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-              <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            </div>
-          )
-        })}
+          <div className="uk-container uk-container-small">
+            {posts.map(({ node }) => {
+              const title = node.frontmatter.title || node.fields.slug
+              return (
+                <article className="uk-article" key={node.fields.slug}>
+                  <h1 className="uk-article-title">
+                    <Link className="uk-link-reset" to={node.fields.slug}>
+                      {title}
+                    </Link>
+                  </h1>
+                  <p className="uk-article-meta">
+                    {node.frontmatter.date}
+                  </p>
+                  <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+                </article>
+              )
+            })}
+          </div>
       </Layout>
     )
   }
